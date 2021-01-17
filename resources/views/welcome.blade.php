@@ -22,7 +22,7 @@
     </head>
     <body>
     <div id= "image">
-         <img id = "img" src="/storage/phpoCPUiT/pzdzkAMQMAladwNfsIXgleXDVrft7rCpnAyja9fC.png" alt="" />
+         <img id = "img" src="/storage/app/tmp/1.png" alt="" />
     </div>
         <h1>
         Witaj w multimodalnym systemie identyfikacji biometrycznej
