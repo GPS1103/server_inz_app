@@ -10,11 +10,7 @@ class ImageController extends Controller
 {
     public function newFrame(Request $request)
     {
-        if ($request->frame) {
-
-            $file = Storage::disk('public')->putFileAs('tmp', $request->frame, '1.png');
-            Frame::dispatch(Storage::url($file));
-        }
+        Frame::dispatch(Storage::url('tmp/ramdisk/tmp.jpg'));
         return 0;
     }
 }

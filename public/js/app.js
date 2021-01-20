@@ -1843,7 +1843,7 @@ module.exports = {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 Echo.channel("frames").listen('.frame', function (e) {
-  document.getElementById("img").src = e.image + "?" + new Date().getTime();
+  document.getElementById("image").src = e.image + "?" + new Date().getTime();
   console.log(e.image);
 });
 
@@ -1879,7 +1879,10 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
   key: "0e6d9dcaa9fd82d3c6b0",
   cluster: "eu",
-  forceTLS: true
+  wsHost: window.location.hostname,
+  wsPort: 6001,
+  forceTLS: false,
+  disableStats: true
 });
 
 /***/ }),
