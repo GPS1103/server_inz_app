@@ -16,6 +16,7 @@ class filewatch extends Command {
     private $mapping = [];
     private $io_instance = null;
     private $semaphore = true;
+    private $old = null;
 
     public function handle() {
         $directory ='/tmp/ramdisk';
@@ -26,16 +27,20 @@ class filewatch extends Command {
             $this->add_watch($directory);
 
             while ($this->semaphore) {
-                //sleep(1);
                 $events = inotify_read($this->io_instance);
-
+                
                 if (!empty($events)) {
+ 
                     foreach ($events as $event) {
                         $dir = $this->mapping[$event['wd']];
                         $filename = $event['name'];
                         $path = "$dir/$filename";
-                        dump($filename);
-                        Frame::dispatch(Storage::url('tmp/ramdisk/tmp.jpg'));
+
+                        if( $filename != $this->old){
+                            $this->old = $filename;
+                            Frame::dispatch(Storage::url('tmp/ramdisk/'.$filename));
+                        }
+                        
                     }
                 }
             }
