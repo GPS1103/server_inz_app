@@ -1842,9 +1842,16 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var imageSrc;
+$(document).ready(function () {
+  imageSrc = document.getElementById("image");
+});
 Echo.channel("frames").listen('.frame', function (e) {
-  document.getElementById("image").src = e.image + "?" + new Date().getTime();
-  console.log(e.image);
+  e.image.forEach(function (img, index) {
+    setTimeout(function () {
+      imageSrc.src = img;
+    }, 40 * index);
+  });
 });
 
 /***/ }),

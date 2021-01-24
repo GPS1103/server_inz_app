@@ -11,8 +11,8 @@ use Illuminate\Queue\SerializesModels;
 class NewFrame implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
     public $image;
+
     /**
      * Create a new event instance.
      *

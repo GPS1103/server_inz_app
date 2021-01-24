@@ -22,7 +22,7 @@
         <main>
             <div class="image-space"> 
                 <div class="image-view">
-                    <img id="image" src="/storage/tmp/ramdisk/tmp.jpg">
+                    <img id="image" src="/storage/html/img/initial.jpg">
                     <button type="button" class="bottom-button btn-danger">
                         <span class="glyphicon glyphicon-fullscreen"></span>
                     </button>

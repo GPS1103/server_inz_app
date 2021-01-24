@@ -19,13 +19,14 @@ class filewatch extends Command {
     private $old = null;
 
     public function handle() {
-        $directory ='/tmp/ramdisk';
+        $directory ='/tmp/ramdisk/photos';
     
         if (!empty($directory)) {
             $this->io_instance = inotify_init();
             stream_set_blocking($this->io_instance, 0);        
             $this->add_watch($directory);
-
+            $arr=null;
+            $index=0;
             while ($this->semaphore) {
                 $events = inotify_read($this->io_instance);
                 
@@ -35,10 +36,23 @@ class filewatch extends Command {
                         $dir = $this->mapping[$event['wd']];
                         $filename = $event['name'];
                         $path = "$dir/$filename";
-
                         if( $filename != $this->old){
+                            
+                            $path = 'public/tmp/ramdisk/photos/'.$this->old;
+                            $data = Storage::get($path);
+                            $base64 = 'data:image/jpg;base64,' . base64_encode($data);
+                            //$arr[]=Storage::url($path);
+                            $arr[]=$base64;
+                            $index= $index+1;
+                            if($index==5){
+                                Frame::dispatch($arr);
+                                $index=0;
+                                $arr=[];
+                            
+                            }
+                           
                             $this->old = $filename;
-                            Frame::dispatch(Storage::url('tmp/ramdisk/'.$filename));
+                        
                         }
                         
                     }
